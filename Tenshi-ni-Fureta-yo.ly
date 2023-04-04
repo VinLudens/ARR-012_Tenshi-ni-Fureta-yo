@@ -1,4 +1,4 @@
-\version "2.22.1" 
+\version "2.22.1"
 
 %date = #(strftime "%B %d %Y" (localtime (current-time)))
 date = "May 01 2022"
@@ -18,10 +18,16 @@ date = "May 01 2022"
 #(set-global-staff-size 18)
 %showLastLength = R1 * 10
 
-pagenumheader = \markup { \fill-line { \null \fromproperty #'page:page-number-string } }
+% pagenumheader = \markup { \fill-line { \null \fromproperty #'page:page-number-string } }
+% \paper {
+%   #(set-paper-size "a4")
+%   evenHeaderMarkup = \markup { \on-the-fly \print-page-number-check-first \pagenumheader }
+%   oddHeaderMarkup = \evenHeaderMarkup
+% }
+% version "2.24.0"
 \paper {
   #(set-paper-size "a4")
-  evenHeaderMarkup = \markup { \on-the-fly \print-page-number-check-first \pagenumheader }
+  evenHeaderMarkup = \markup { \if \should-print-page-number { \fill-line { "" \fromproperty #'page:page-number-string } } }
   oddHeaderMarkup = \evenHeaderMarkup
 }
 
